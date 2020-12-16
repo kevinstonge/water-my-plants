@@ -1,9 +1,13 @@
-const express = require('express');
+const express = require("express");
 const server = express();
 server.use(express.json());
-const cors = require('cors');
-server.use(cors());
-const helmet = require('helmet');
-server.use(helmet());
+server.use(require("cors")());
+server.use(require("helmet")());
+
+server.get("/", (req, res) => {
+  res.status(200).json({ message: "server online!" });
+});
+
+server.use("/api/users", require("./api/users/user-router.js"));
 
 module.exports = server;
