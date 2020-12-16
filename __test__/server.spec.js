@@ -48,7 +48,7 @@ describe("POST request to /api/users/register", () => {
     it("should respond with an error if an invalid phone number is provided", async () => {
       const result = await request(server)
         .post("/api/users/register")
-        .send({ ...userRegInput[0], phone: "333-54a4" });
+        .send({ ...userRegInput[0], phone: "860a333-5454" });
       expect(result.body.error).toBe("you must provide a valid phone number");
       expect(result.status).toBe(400);
     });
