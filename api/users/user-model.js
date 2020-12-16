@@ -4,6 +4,7 @@ const createUser = async (newUserObject) => {
   try {
     return await db("users").insert(newUserObject);
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
