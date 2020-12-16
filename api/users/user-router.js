@@ -23,7 +23,7 @@ router.post("/register", validateRegistrationInput, async (req, res) => {
     res.status(500).json({
       error:
         "an unknown error occurred while attempting to create the user, see serverErrorMessage for more details",
-      serverErrorMessage: JSON.stringify(error),
+      serverErrorMessage: error,
     });
   }
 });

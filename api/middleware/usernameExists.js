@@ -10,6 +10,7 @@ module.exports = async (req, res, next) => {
     res.status(500).json({
       error: "server error, see serverErrorMessage for details",
       serverErrorMessage: error,
+      c: "api.mid.use.13",
     });
   }
 };
