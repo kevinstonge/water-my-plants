@@ -28,11 +28,3 @@ module.exports = {
     migrations: { directory: "./data/migrations" },
   },
 };
-
-/*
-
-heroku run knex migrate:latest --env production -a water-my-plants-lambda
-
-git add . | git commit -m "..." | git push
-
-*/

@@ -4,8 +4,51 @@ Backend repo: https://github.com/kevinstonge/water-my-plants
 
 Backend Heroku App: https://water-my-plants-lambda.herokuapp.com
 
-Endpoints:
+# Endpoints
 
-POST to /api/register { username, phone, password }
+## POST to /api/register
 
-POST to /api/login { username, password }
+provide the following object in the request body:
+
+```javascript
+{
+    username: [desired username],
+    phone: [your phone number],
+    password: [password]
+}
+```
+
+server will either return an error message:
+`{ "error": "[some error]" }`
+
+or a success message and a token:
+
+```javascript
+{
+    "message": "registration successful",
+    "token": "[the token]"
+}
+```
+
+## POST to /api/login
+
+provide the following object in the request body:
+
+```javascript
+{
+    username: [your username],
+    password: [your password]
+}
+```
+
+server will either return an error message:
+`{"error": "[some error]"}`
+
+or a success message and a token:
+
+```javascript
+{
+    "message": "login successful",
+    "token": "[the token]"
+}
+```
