@@ -23,7 +23,10 @@ module.exports = {
   },
   production: {
     client: "pg",
-    connection: process.env.DATABASE_URL,
+    connection: {
+      database: process.env.DATABASE_URL,
+      ssl: true
+    },
     pool: {
       min: 2,
       max: 10
@@ -31,3 +34,11 @@ module.exports = {
     migrations: { directory: "./data/migrations" },
   },
 };
+
+/*
+
+heroku run knex migrate:latest --env production -a water-my-plants-lambda
+
+git add . | git commit -m "..." | git push
+
+*/
