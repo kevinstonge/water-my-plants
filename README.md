@@ -52,3 +52,25 @@ or a success message and a token:
     "token": "[the token]"
 }
 ```
+## GET to /api/users ##
+
+provide your user token in the authentication header:
+
+```javascript
+{ 
+    "headers": { 
+        "authentication": "Bearer [your token]"
+    }
+}
+```
+
+server will either return an error message:
+`{"error":"[some error]"}`
+
+or an object containing the username and phone number for that user:
+``javascript
+{
+    "username":"[username]",
+    "phone":"[phone number]"
+}
+```
