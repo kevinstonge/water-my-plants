@@ -4,11 +4,42 @@ const db = require("../data/dbConfig.js");
 beforeAll(() => {
   return db("plants").truncate();
 });
-describe("POST request to /api/plants/", () => {
-    it("if token is missing it should respond with 401", async () => {
+describe("Unauthorized POST requests to /api/plants/", () => {
+    it("should respond with 401 if token is not valid", async () => {
         const result = await request(server)
             .post("/api/plants/")
             .send({ headers: { "Authorization": "Bearer badtok3n" } });
         expect(result.status).toBe(401);
+    });
+    it("should respond with 401 if token is missing", async () => {
+        const result = await request(server).post("/api/plants/").send({ headers: { "Authorization": "" } });
+        expect(result.status).toBe(401);
+    });
+    it("should respond with 401 if authorization header is missing", async () => {
+        const result = await request(server).post("/api/plants/");
+        expect(result.status).toBe(401);
     })
 })
+describe("Unauthorized GET requests to /api/plants/", () => {
+    it("should respond with 401 if token is not valid", async () => {
+        const result = await request(server)
+            .get("/api/plants/")
+            .send({ headers: { "Authorization": "Bearer badtok3n" } });
+        expect(result.status).toBe(401);
+    });
+    it("should respond with 401 if token is missing", async () => {
+        const result = await request(server).get("/api/plants/").send({ headers: { "Authorization": "" } });
+        expect(result.status).toBe(401);
+    });
+    it("should respond with 401 if authorization header is missing", async () => {
+        const result = await request(server).get("/api/plants/");
+        expect(result.status).toBe(401);
+    });
+})
+
+describe("POST requests to /api/plants/ with bad input", () => {
+    it("should respond with 400 if incomplete data is provided", async () => {
+        const result = await request(server).post("/api/plants/").send({ "nickname": "george" });
+        expect(result.status).toBe(400);
+    });
+});
