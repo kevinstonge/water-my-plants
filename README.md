@@ -88,8 +88,8 @@ provide the following object in your request body:
 
 ```javascript
 {
-    "password": "[current password]",
-    "newPassword": "[new password]"
+    "oldPassword": "[current password]",
+    "password": "[new password]"
 }
 ```
 
@@ -98,3 +98,12 @@ server will either return an error message:
 
 or a message indicating that the password was changed successfully:
 `{ "message": "successfully changed password" }`
+
+### PUT to /api/users/phone ###
+
+provide the following object in your request body: `{"phone":"[new phone number]"}`
+
+server will either return an error message: `{"error":"[some error]"}`
+
+or a message indicating the the phone number was changed successfully:
+`{"message": "successfully updated phone number to [new phone number"}`

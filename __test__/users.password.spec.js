@@ -11,7 +11,7 @@ beforeAll(async () => {
 describe("PUT request to /api/users/password given valid credentials",()=>{
     it("should respond with status 200",async()=>{
         const login = await request(server).post("/api/users/login").send(userCredentials[0]);
-        const result = await request(server).put('/api/users/password').send(userCredentials[0]).set('Authorization', `Bearer ${login.body.token}`).send({"password":userCredentials[0].password,"newPassword":"newPassword"});
+        const result = await request(server).put('/api/users/password').send(userCredentials[0]).set('Authorization', `Bearer ${login.body.token}`).send({"oldPassword":userCredentials[0].password,"password":"newPassword"});
         expect(result.status).toBe(200);
     });
     it("should allow login with new password",async()=>{
@@ -21,15 +21,15 @@ describe("PUT request to /api/users/password given valid credentials",()=>{
 });
 describe("PUT request to /api/users/password given invalid credentials",()=>{
     it("should respond with 401 if provided no token",async()=>{
-        const result = await request(server).put('/api/users/password').send({"password":userCredentials[0].password,"newPassword":"newPassword"});
+        const result = await request(server).put('/api/users/password').send({"oldPassword":userCredentials[0].password,"password":"newPassword"});
         expect(result.status).toBe(401);
     });
     it("should respond with 401 if provided invalid token",async()=>{
-        const result = await request(server).put('/api/users/password').send(userCredentials[0]).set('Authorization', `Bearer badtok3n`).send({"password":userCredentials[0].password,"newPassword":"newPassword"});
+        const result = await request(server).put('/api/users/password').send(userCredentials[0]).set('Authorization', `Bearer badtok3n`).send({"oldPassword":userCredentials[0].password,"password":"newPassword"});
     });
     it("should respond with 401 if original password provided is incorrect",async()=>{
         const login = await request(server).post("/api/users/login").send(userCredentials[0]);
-        const result = await request(server).put('/api/users/password').send(userCredentials[0]).set('Authorization', `Bearer ${login.body.token}`).send({"password":"incorrectPassword","newPassword":"newPassword"});
+        const result = await request(server).put('/api/users/password').send(userCredentials[0]).set('Authorization', `Bearer ${login.body.token}`).send({"oldPassword":"incorrectPassword","password":"newPassword"});
         expect(result.status).toBe(401);
     })
 });

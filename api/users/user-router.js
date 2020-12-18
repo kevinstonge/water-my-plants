@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const usernameExists = require('../middleware/usernameExists.js');
 const validateRegistrationInput = require("../middleware/validateRegistrationInput");
 const validToken = require('../middleware/validToken.js');
+const validPassword = require('../middleware/validPassword.js');
 const dbConfig = require("../../data/dbConfig.js");
 router.post("/register", validateRegistrationInput, async (req, res) => {
   try {
@@ -67,19 +68,14 @@ router.get('/', validToken, async (req, res) => {
   }
 });
 
-router.put('/password', [validToken, usernameExists], async (req, res) => {
+router.put('/password', [validToken, usernameExists, validPassword], async (req, res) => {
   const username = req.authenticatedUsername;
-  const { password, newPassword } = req.body;
+  const { oldPassword, password } = req.body;
   try {
-    if (bcrypt.compareSync(password, req.userObject.password)) {
-      if (newPassword) {
-        const hash = bcrypt.hashSync(newPassword);
-        const updatePassword = await Users.updatePassword({ username, password: hash });
-        res.status(200).json({ message: "successfully changed password" })
-      }
-      else {
-        res.status(400).json({ error: "password not changed, no new password was provided" })
-      }
+    if (bcrypt.compareSync(oldPassword, req.userObject.password)) {
+      const hash = bcrypt.hashSync(password);
+      const updatePassword = await Users.updatePassword({ username, password: hash });
+      res.status(200).json({ message: "successfully changed password" })
     }
     else {
       res.status(401).json({ error: "incorrect password" })
@@ -93,12 +89,14 @@ router.put('/password', [validToken, usernameExists], async (req, res) => {
 
 router.put('/phone', [validToken, usernameExists], async (req, res) => {
   const username = req.authenticatedUsername;
-  const { phone, newPhone } = req.body;
+  const phone = req.body.phone;
   try {
-    res.status(200).json({message: "placeholder success message"})
+    const update = await Users.updatePhone({username,phone})
+    res.status(200).json({message: `successfully updated phone number to ${phone}`})
   }
   catch (error) {
-    res.status(500).json({error: "placeholder error message"})
+    console.log(error);
+    res.status(500).json({error: "unable to update phone number"})
   }
 })
 
