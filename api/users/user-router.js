@@ -6,6 +6,7 @@ const usernameExists = require('../middleware/usernameExists.js');
 const validateRegistrationInput = require("../middleware/validateRegistrationInput");
 const validToken = require('../middleware/validToken.js');
 const validPassword = require('../middleware/validPassword.js');
+const validPhone = require('../middleware/validPhone.js');
 const dbConfig = require("../../data/dbConfig.js");
 router.post("/register", validateRegistrationInput, async (req, res) => {
   try {
@@ -87,7 +88,7 @@ router.put('/password', [validToken, usernameExists, validPassword], async (req,
   }
 });
 
-router.put('/phone', [validToken, usernameExists], async (req, res) => {
+router.put('/phone', [validToken, usernameExists, validPhone], async (req, res) => {
   const username = req.authenticatedUsername;
   const phone = req.body.phone;
   try {
