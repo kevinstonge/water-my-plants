@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Users = require("./user-model.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const usernameExists = require('../middleware/usernameExists.js');
 const validateRegistrationInput = require("../middleware/validateRegistrationInput");
 const validToken = require('../middleware/validToken.js');
 const dbConfig = require("../../data/dbConfig.js");
@@ -66,7 +67,7 @@ router.get('/', validToken, async (req, res) => {
   }
 });
 
-router.put('/password', [validToken, require('../middleware/usernameExists.js')], async (req, res) => {
+router.put('/password', [validToken, usernameExists], async (req, res) => {
   const username = req.authenticatedUsername;
   const { password, newPassword } = req.body;
   try {
@@ -90,7 +91,7 @@ router.put('/password', [validToken, require('../middleware/usernameExists.js')]
   }
 });
 
-router.put('/phone', [validToken, require('../middleware/usernameExists.js')], async (req, res) => {
+router.put('/phone', [validToken, usernameExists], async (req, res) => {
   const username = req.authenticatedUsername;
   const { phone, newPhone } = req.body;
   try {

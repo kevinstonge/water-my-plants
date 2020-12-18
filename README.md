@@ -4,9 +4,13 @@ Backend repo: https://github.com/kevinstonge/water-my-plants
 
 Backend Heroku App: https://water-my-plants-lambda.herokuapp.com
 
-# Endpoints
+# Endpoints #
 
-## POST to /api/register
+## unrestricted endpoints ## 
+
+these endpoints do not require the authentication token
+
+### POST to /api/register ###
 
 provide the following object in the request body:
 
@@ -30,7 +34,7 @@ or a success message and a token:
 }
 ```
 
-## POST to /api/login
+### POST to /api/login ###
 
 provide the following object in the request body:
 
@@ -52,9 +56,9 @@ or a success message and a token:
     "token": "[the token]"
 }
 ```
-## GET to /api/users ##
+## restricted endpoints ##
 
-provide your user token in the authentication header:
+these endpoints require that you provide your user token in the authentication header:
 
 ```javascript
 { 
@@ -63,6 +67,8 @@ provide your user token in the authentication header:
     }
 }
 ```
+
+### GET to /api/users ###
 
 server will either return an error message:
 `{"error":"[some error]"}`
@@ -75,3 +81,20 @@ or an object containing the username and phone number for that user:
     "phone":"[phone number]"
 }
 ```
+
+### PUT to /api/users/password ###
+
+provide the following object in your request body:
+
+```javascript
+{
+    "password": "[current password]",
+    "newPassword": "[new password]"
+}
+```
+
+server will either return an error message:
+`{"error":"[some error]"}`
+
+or a message indicating that the password was changed successfully:
+`{ "message": "successfully changed password" }`
