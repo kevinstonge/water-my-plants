@@ -12,9 +12,9 @@ provide the following object in the request body:
 
 ```javascript
 {
-    username: [desired username],
-    phone: [your phone number],
-    password: [password]
+    "username": "[desired username]",
+    "phone": "[your phone number]",
+    "password": "[password]"
 }
 ```
 
@@ -36,8 +36,8 @@ provide the following object in the request body:
 
 ```javascript
 {
-    username: [your username],
-    password: [your password]
+    "username": "[your username]",
+    "password": "[your password]"
 }
 ```
 

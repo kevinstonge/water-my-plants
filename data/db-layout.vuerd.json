@@ -3,7 +3,7 @@
     "width": 2000,
     "height": 2000,
     "scrollTop": 8,
-    "scrollLeft": 0,
+    "scrollLeft": 2.4000000953674316,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -137,7 +137,7 @@
           "active": false,
           "left": 16,
           "top": 52,
-          "zIndex": 259,
+          "zIndex": 264,
           "widthName": 60,
           "widthComment": 60
         },
@@ -261,78 +261,40 @@
               "widthDefault": 60
             },
             "id": "ed6d5c5f-f30d-218e-8ee0-7b16fa3ec79c"
+          },
+          {
+            "name": "owner_id",
+            "comment": "",
+            "dataType": "INTEGER",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "110b0bcb-215e-3ea6-4da1-4a67918e8cbc"
           }
         ],
         "ui": {
           "active": true,
-          "left": 487,
-          "top": 337,
-          "zIndex": 262,
+          "left": 14.999999999999744,
+          "top": 361.80000000000064,
+          "zIndex": 280,
           "widthName": 60,
           "widthComment": 60
         },
         "id": "4d99b6dd-f52c-ac78-3b76-df5b80e17f9b"
-      },
-      {
-        "name": "user-plants",
-        "comment": "",
-        "columns": [
-          {
-            "name": "user_id",
-            "comment": "",
-            "dataType": "INTEGER",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "40ea873f-a117-8080-7d8f-7d2c0185c712"
-          },
-          {
-            "name": "plant_id",
-            "comment": "",
-            "dataType": "INTEGER",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "9c6ca81c-c479-c69e-6d3b-e651c39999a6"
-          }
-        ],
-        "ui": {
-          "active": false,
-          "left": 17,
-          "top": 337,
-          "zIndex": 260,
-          "widthName": 66,
-          "widthComment": 60
-        },
-        "id": "7145e80d-6538-7af4-7d3c-0822ed27a412"
       },
       {
         "name": "waterings",
@@ -433,9 +395,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 488,
-          "top": 53,
-          "zIndex": 261,
+          "left": 478.39999999999975,
+          "top": 152.19999999999993,
+          "zIndex": 279,
           "widthName": 60,
           "widthComment": 60
         },
@@ -456,52 +418,6 @@
           "columnIds": [
             "4a642852-5306-6cce-a818-efe9041f3ec6"
           ],
-          "x": 189.5,
-          "y": 203,
-          "direction": "bottom"
-        },
-        "end": {
-          "tableId": "7145e80d-6538-7af4-7d3c-0822ed27a412",
-          "columnIds": [
-            "40ea873f-a117-8080-7d8f-7d2c0185c712"
-          ],
-          "x": 190.5,
-          "y": 337,
-          "direction": "top"
-        },
-        "id": "4034464a-47b4-f6f6-0a11-c8d8152e9c2d",
-        "relationshipType": "N"
-      },
-      {
-        "identification": false,
-        "start": {
-          "tableId": "4d99b6dd-f52c-ac78-3b76-df5b80e17f9b",
-          "columnIds": [
-            "01246129-0264-dca1-7ccb-ea7d2912a847"
-          ],
-          "x": 487,
-          "y": 422.75,
-          "direction": "left"
-        },
-        "end": {
-          "tableId": "7145e80d-6538-7af4-7d3c-0822ed27a412",
-          "columnIds": [
-            "9c6ca81c-c479-c69e-6d3b-e651c39999a6"
-          ],
-          "x": 364,
-          "y": 392,
-          "direction": "right"
-        },
-        "id": "5782796c-3507-4486-80cc-eb3b808349d5",
-        "relationshipType": "N"
-      },
-      {
-        "identification": false,
-        "start": {
-          "tableId": "80db1f8e-4f7b-daca-3879-7545db9097de",
-          "columnIds": [
-            "4a642852-5306-6cce-a818-efe9041f3ec6"
-          ],
           "x": 363,
           "y": 127.5,
           "direction": "right"
@@ -511,8 +427,8 @@
           "columnIds": [
             "6108b238-ed5e-28b4-593a-47e27fb31dd6"
           ],
-          "x": 488,
-          "y": 128.5,
+          "x": 478.39999999999975,
+          "y": 189.94999999999993,
           "direction": "left"
         },
         "id": "72f14d64-a72e-ee8d-e682-7ff4128f1640",
@@ -525,20 +441,43 @@
           "columnIds": [
             "01246129-0264-dca1-7ccb-ea7d2912a847"
           ],
-          "x": 681,
-          "y": 337,
-          "direction": "top"
+          "x": 402.9999999999998,
+          "y": 457.80000000000064,
+          "direction": "right"
         },
         "end": {
           "tableId": "c4a5f690-6768-9a01-d65f-3986e94d1577",
           "columnIds": [
             "895710e1-aa15-dd61-77ae-242e472c1b97"
           ],
-          "x": 663,
-          "y": 204,
-          "direction": "bottom"
+          "x": 478.39999999999975,
+          "y": 265.44999999999993,
+          "direction": "left"
         },
         "id": "c2c706b3-9b22-029b-4cd5-405da6441c7c",
+        "relationshipType": "N"
+      },
+      {
+        "identification": false,
+        "start": {
+          "tableId": "80db1f8e-4f7b-daca-3879-7545db9097de",
+          "columnIds": [
+            "4a642852-5306-6cce-a818-efe9041f3ec6"
+          ],
+          "x": 189.5,
+          "y": 203,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "4d99b6dd-f52c-ac78-3b76-df5b80e17f9b",
+          "columnIds": [
+            "110b0bcb-215e-3ea6-4da1-4a67918e8cbc"
+          ],
+          "x": 208.99999999999974,
+          "y": 361.80000000000064,
+          "direction": "top"
+        },
+        "id": "603ff4ea-d5f3-79bd-c5da-18dbc7c26fe7",
         "relationshipType": "N"
       }
     ]

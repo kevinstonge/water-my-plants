@@ -10,4 +10,7 @@ server.get("/", (req, res) => {
 
 server.use("/api/users", require("./api/users/user-router.js"));
 
+server.use("/api/plants", require("./api/middleware/validToken.js"));
+server.use("/api/plants", require("./api/plants/plant-router.js"));
+
 module.exports = server;
