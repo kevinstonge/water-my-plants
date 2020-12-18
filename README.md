@@ -68,7 +68,8 @@ server will either return an error message:
 `{"error":"[some error]"}`
 
 or an object containing the username and phone number for that user:
-``javascript
+
+```javascript
 {
     "username":"[username]",
     "phone":"[phone number]"
