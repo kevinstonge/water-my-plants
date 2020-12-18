@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get('/', validToken, async (req, res) => {
-  const username = req.user.username;
+  const username = req.authenticatedUsername;
   try {
     const userDetails = await Users.getUserByUsername(username);
     res.status(200).json({ username: userDetails.username, phone: userDetails.phone })
