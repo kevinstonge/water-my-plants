@@ -17,4 +17,13 @@ const getUserByUsername = async (username) => {
   }
 };
 
-module.exports = { createUser, getUserByUsername };
+const updatePassword = async (userObject) => {
+  try {
+    return await db('users').where({ username: userObject.username }).update({ password: userObject.password })
+  }
+  catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { createUser, getUserByUsername, updatePassword };
