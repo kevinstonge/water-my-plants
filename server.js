@@ -17,7 +17,6 @@ module.exports = server;
 
 /*
 TODO:
-  validPhone regex is bad
-  profile GET (username, phonenumber);
   plants (all)
+  get csv: https://github.com/treflehq/dump/blob/master/species.csv#L3
 */
