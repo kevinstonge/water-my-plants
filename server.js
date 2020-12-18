@@ -14,3 +14,10 @@ server.use("/api/plants", require("./api/middleware/validToken.js"));
 server.use("/api/plants", require("./api/plants/plant-router.js"));
 
 module.exports = server;
+
+/*
+TODO:
+  validPhone regex is bad
+  profile GET (username, phonenumber);
+  plants (all)
+*/
