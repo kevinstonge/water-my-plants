@@ -55,5 +55,28 @@ describe("PUT requests to /api/plants/:id", () => {
             .set("Authorization", `Bearer ${user2Token}`)
             .send({ "nickname": "tim" });
         expect(result.status).toBe(401);
+    });
+    it("should respond with a success message when given values to update", async () => {
+        const result = await request(server)
+            .put("/api/plants/1")
+            .set("Authorization", `Bearer ${userToken}`)
+            .send({ "nickname": "tim" });
+        // expect(result.status).toBe(200);
+        expect(result.status).toBe(200);
+    });
+    it("should respond with updated values when GET request for the edited plant is received", async () => {
+        const result = await request(server)
+            .get("/api/plants/1")
+            .set("Authorization", `Bearer ${userToken}`);
+        expect(result.body.plant.nickname).toBe("tim");
+    })
+});
+
+describe("DELETE requests to /api/plants/:id", () => {
+    it("should respond with an error if the plant does not belong to the user making the request", async () => {
+        const result = await request(server)
+            .delete("/api/plants/1")
+            .set("Authorization", `Bearer ${user2Token}`);
+        expect(result.status).toBe(401);
     })
 })

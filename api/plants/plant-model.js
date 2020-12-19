@@ -5,7 +5,7 @@ const createPlant = async (plantObject) => {
 }
 
 const getPlantById = async (id) => {
-    return await db('plants').where({id})
+    return await db('plants').where({ id }).first();
 }
 
 const getPlantByUserId = async (userId) => {
@@ -18,4 +18,8 @@ const editPlant = async (id, updateObject) => {
         .where({ id })
 }
 
-module.exports = { createPlant, getPlantByUserId, getPlantById, editPlant }
+const deletePlant = async (id) => {
+    return await db('plants').delete().where({id})
+}
+
+module.exports = { createPlant, getPlantByUserId, getPlantById, editPlant, deletePlant }
