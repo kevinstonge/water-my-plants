@@ -9,9 +9,7 @@ module.exports = async (req, res, next) => {
     next();
   } catch (error) {
     res.status(500).json({
-      error: "server error, see serverErrorMessage for details",
-      serverErrorMessage: error,
-      c: "api.mid.use.13",
+      error: "an error occurred (api/middleware/useernameExists.js)",
     });
   }
 };

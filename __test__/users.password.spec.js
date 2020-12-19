@@ -1,7 +1,6 @@
 const request = require("supertest");
 const server = require("../server.js");
 const db = require("../data/dbConfig.js");
-const bcrypt = require('bcryptjs');
 const userCredentials = require("./userInfo.js");
 const populateUsers = require('./populateUsers.js');
 beforeAll(async () => {

@@ -36,10 +36,3 @@ describe("Unauthorized GET requests to /api/plants/", () => {
         expect(result.status).toBe(401);
     });
 })
-
-// describe("POST requests to /api/plants/ with bad input", () => {
-//     it("should respond with 400 if incomplete data is provided", async () => {
-//         const result = await request(server).post("/api/plants/").send({ "nickname": "george" });
-//         expect(result.status).toBe(400);
-//     });
-// });

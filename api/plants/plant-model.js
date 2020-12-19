@@ -1,7 +1,11 @@
 const db = require("../../data/dbConfig.js");
 
 const createPlant = async (plantObject) => {
-    return "";
+    return await db('plants').insert(plantObject);
 }
 
-module.exports = { createPlant }
+const getPlantByUserId = async (userId) => {
+    return await db('plants').where({ owner_id: userId });
+}
+
+module.exports = { createPlant, getPlantByUserId }
