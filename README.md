@@ -109,7 +109,7 @@ server will either return an error message: `{"error":"[some error]"}`
 or a message indicating the the phone number was changed successfully:
 `{"message": "successfully updated phone number to [new phone number"}`
 
-### PUT to /api/plants
+### POST to /api/plants
 
 provide the following object in your request body:
 

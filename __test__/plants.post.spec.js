@@ -10,6 +10,8 @@ beforeAll(async () => {
     await populateUsers(userCredentials);
     const loginResponse = await request(server).post('/api/users/login').send(userCredentials[0]);
     userToken = loginResponse.body.token
+    const loginResponse2 = await request(server).post('/api/users/login').send(userCredentials[1]);
+    user2Token = loginResponse2.body.token
 });
 describe("POST requests to /api/plants/ with bad input", () => {
     it("should respond with 400 if incomplete data is provided", async () => {
@@ -43,6 +45,15 @@ describe("GET requests to /api/plants", () => {
             .get("/api/plants/")
             .set('Authorization', `Bearer ${userToken}`);
         expect(result.body.plants).toHaveLength(2);
-        console.log(result.body.plants);
+    })
+});
+
+describe("PUT requests to /api/plants/:id", () => {
+    it("should respond with an error if the plant does not belong to the user making the request", async () => {
+        const result = await request(server)
+            .put("/api/plants/1")
+            .set("Authorization", `Bearer ${user2Token}`)
+            .send({ "nickname": "tim" });
+        expect(result.status).toBe(401);
     })
 })

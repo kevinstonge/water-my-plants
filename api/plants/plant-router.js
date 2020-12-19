@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
         else {
             const owner_id = req.userObject.id;
             const [newPlantId] = await Plants.createPlant({ nickname, binomial, water_frequency, image, owner_id });
-            res.status(200).json({newPlantId})
+            res.status(200).json({message: `successfully added ${nickname} to the database`, newPlantId})
         }
     }
     catch (error) {
@@ -25,6 +25,29 @@ router.get('/', async (req, res) => {
     }
     catch (error) {
         res.status(500).json({error: "unable to retrieve plants from the database"})
+    }
+})
+
+router.put('/:id', async (req, res) => {
+    try {
+        const plantId = req.params.id;
+        const userId = req.userObject.id;
+        const plant = await Plants.getPlantById(plantId);
+        if (plant.owner_id == userId) {
+            //create then pass object containing values to update
+            const { nickname, binomial, water_frequency, image } = req.body;
+            const update = {
+                nickname: (nickname === plant.nickname) ? undefined : nickname,
+                
+            }
+            res.status(200);
+        }
+        else {
+            res.status(401).json({error: "don't touch! that plant does not belong to you!"})
+        }
+    }
+    catch (error) {
+        res.status(500).json({error: "unable to edit the plant information in the database"})
     }
 })
 
