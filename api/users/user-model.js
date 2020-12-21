@@ -2,7 +2,7 @@ const db = require("../../data/dbConfig.js");
 
 const createUser = async (newUserObject) => {
   try {
-    return await db("users").insert(newUserObject);
+    return await db("users").insert(newUserObject).returning('id');
   } catch (error) {
     console.log(error);
     throw error;

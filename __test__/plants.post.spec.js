@@ -15,23 +15,27 @@ beforeAll(async () => {
 });
 describe("POST requests to /api/plants/ with bad input", () => {
     it("should respond with 400 if incomplete data is provided", async () => {
-        const result = await request(server).post("/api/plants/").send({ "nickname": "george" }).set('Authorization', `Bearer ${userToken}`);
+        const result = await request(server).post("/api/plants/").send({ "binomial": "george" }).set('Authorization', `Bearer ${userToken}`);
         expect(result.status).toBe(400);
     });
+    it("should respond with an error if invalid data is provided", async () => {
+        const result = await request(server).post("/api/plants/").send({ "binomial": "george", "water_frequency": "asdf" }).set('Authorization', `Bearer ${userToken}`);
+        expect(result.status).toBe(400);
+    })
 });
 
 describe("POST requests to /api/plants with valid input", () => {
     it("should respond with 200 and provide newPlantId", async () => {
         const result = await request(server)
             .post("/api/plants/")
-            .send({ "nickname": "george", "water_frequency": "4" })
+            .send({ "nickname": "george1", "water_frequency": "4" })
             .set('Authorization', `Bearer ${userToken}`);
         expect(result.status).toBe(200);
         expect(result.body.newPlantId).toBe(1);
 
         const result2 = await request(server)
             .post("/api/plants/")
-            .send({ "nickname": "george", "water_frequency": "4" })
+            .send({ "nickname": "george2", "water_frequency": "4" })
             .set('Authorization', `Bearer ${userToken}`);
         expect(result2.status).toBe(200);
         expect(result2.body.newPlantId).toBe(2);
@@ -60,7 +64,7 @@ describe("PUT requests to /api/plants/:id", () => {
         const result = await request(server)
             .put("/api/plants/1")
             .set("Authorization", `Bearer ${userToken}`)
-            .send({ "nickname": "tim" });
+            .send({ "nickname": "tim", "water_frequency": "10" });
         // expect(result.status).toBe(200);
         expect(result.status).toBe(200);
     });

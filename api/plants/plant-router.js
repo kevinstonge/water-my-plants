@@ -1,16 +1,19 @@
 const router = require('express').Router();
 const Plants = require("./plant-model.js");
+const validPlantAttributes = [require('../middleware/plant_validNickname.js'), require('../middleware/plant_validBinomial.js'), require('../middleware/plant_validWaterFrequency.js'), require('../middleware/plant_validImage.js')];
 
-router.post('/', async (req, res) => {
+router.use('/:id', require('../middleware/plantExists.js'));
+
+router.post('/', validPlantAttributes, async (req, res) => {
     try {
-        const { nickname, binomial = "", water_frequency, image = "" } = req.body;
-        if (!nickname || !water_frequency) {
+        const plant = req.validatedPlantInput;
+        if (!plant.nickname || !plant.water_frequency) {
             res.status(400).json({ error: "you must provide a nickname and water_frequency for your plant" })
         }
         else {
-            const owner_id = req.userObject.id;
-            const [newPlantId] = await Plants.createPlant({ nickname, binomial, water_frequency, image, owner_id });
-            res.status(200).json({message: `successfully added ${nickname} to the database`, newPlantId})
+            plant.owner_id = req.userObject.id;
+            const [newPlantId] = await Plants.createPlant(plant);
+            res.status(200).json({message: `successfully added ${plant.nickname} to the database`, newPlantId})
         }
     }
     catch (error) {
@@ -28,31 +31,11 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', validPlantAttributes, async (req, res) => {
     try {
-        const plantId = req.params.id;
-        const userId = req.userObject.id;
-        const plant = await Plants.getPlantById(plantId);
-        if (plant.owner_id == userId) {
-            //create then pass object containing values to update
-            const { nickname = undefined, binomial = undefined, water_frequency = undefined, image = undefined } = req.body;
-            if (nickname === "") {
-                res.status(400).json({ message: "nickname cannot be changed to an empty string" })
-            }
-            else if (parseFloat(water_frequency) > 0) {
-                res.status(400).json({message: "water frequency must be a number and be greater than zero"})
-            }
-            else {
-                const update = Plants.editPlant(plantId,
-                    {
-                        nickname, binomial, water_frequency, image
-                    });
-                res.status(200).json({update});
-            }
-        }
-        else {
-            res.status(401).json({error: `don't touch! that plant does not belong to you!`})
-        }
+        const update = await Plants.editPlant(req.params.id, req.validatedPlantInput);
+        const updatedPlant = await Plants.getPlantById(req.params.id);
+        res.status(200).json({message: "update successful", updatedPlant})
     }
     catch (error) {
         res.status(500).json({error: "unable to edit the plant information in the database"})
@@ -60,17 +43,13 @@ router.put('/:id', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-    const plant = await Plants.getPlantById(req.params.id)
-    res.status(200).json({plant})
+    res.status(200).json({plant: req.plantObject})
 })
 
 router.delete("/:id", async (req, res) => {
-    const plantId = req.params.id;
-    const userId = req.userObject.id;
-    const plant = await Plants.getPlantById(plantId);
-    if (plant.owner_id == userId) {
-        const deletion = await Plants.deletePlant(plantId);
-        res.status(200).json({message: "plant deleted!"})
+    if (req.plantObject.owner_id == req.userObject.id) {
+        const deletion = await Plants.deletePlant(req.plantObject.id);
+        res.status(200).json({message: `plant (id: ${req.plantObject.id}) deleted!`})
     }
     else {
         res.status(401).json({ error: "don't touch! that plant does not belong to you!" });

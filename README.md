@@ -157,3 +157,26 @@ server will return an array of plant objects that contains all plants associated
     ]
 }
 ```
+
+## PUT to /api/plants/:plantId
+
+provide all or part of the following object in your request body:
+
+```javascript
+{
+    "nickname": "[nickname for your plant]",
+    "binomial": "[Genus species of your plant (optional)]",
+    "water_frequency": "[number of times per month this plant needs water]",
+    "image": "[url to image of your plant (optional)]"
+}
+```
+
+server will either return an error message or a message indicating that the plant was successfully edited, and providing the updated plant object:
+
+```javascript
+{message: "update successful", updatedPlant})
+{
+    "message": "update successful",
+    "updatedPlant": {"id": "[id]", "nickname", "[nickname]", ...}
+}
+```
