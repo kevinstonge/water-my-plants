@@ -19,5 +19,5 @@ module.exports = server;
 /*
 TODO:
   plants (all)
-  get csv: https://github.com/treflehq/dump/blob/master/species.csv#L3
+  expore this: https://github.com/sckott/usdaplantsapi/blob/master/usdadb_new.sqlite3
 */
