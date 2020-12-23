@@ -174,7 +174,6 @@ provide all or part of the following object in your request body:
 server will either return an error message or a message indicating that the plant was successfully edited, and providing the updated plant object:
 
 ```javascript
-{message: "update successful", updatedPlant})
 {
     "message": "update successful",
     "updatedPlant": {"id": "[id]", "nickname", "[nickname]", ...}
@@ -183,7 +182,7 @@ server will either return an error message or a message indicating that the plan
 
 ## /api/usda endpoints
 
-Data come from this repository: https://github.com/sckott/usdaplantsapi/
+data comes from this repository: https://github.com/sckott/usdaplantsapi/
 
 ### GET to /api/usda/genera
 
@@ -193,9 +192,9 @@ returns an array of all plant genera in the database:
 
 ### GET to /api/usda/:genus/species
 
-returns an array of objects, each object contains a species name and the unique database id of that species:
+returns all species in the database that belong to the specified genus. The data is an array of objects, each object contains a species name and the unique database id of that species:
 
-`{"species": [{ Species: 'californica', id: 360}, ...]}`
+`{"species": [{ "Species": "californica", id: 360}, ...]}`
 
 ### GET to /api/usda/:id
 
