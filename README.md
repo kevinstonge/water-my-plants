@@ -158,7 +158,7 @@ server will return an array of plant objects that contains all plants associated
 }
 ```
 
-## PUT to /api/plants/:plantId
+### PUT to /api/plants/:plantId
 
 provide all or part of the following object in your request body:
 
@@ -180,3 +180,25 @@ server will either return an error message or a message indicating that the plan
     "updatedPlant": {"id": "[id]", "nickname", "[nickname]", ...}
 }
 ```
+
+## /api/usda endpoints
+
+Data come from this repository: https://github.com/sckott/usdaplantsapi/
+
+### GET to /api/usda/genera
+
+returns an array of all plant genera in the database:
+
+`{"genera": ["Abutilon","Abrus","Abietinella",...]}`
+
+### GET to /api/usda/:genus/species
+
+returns an array of objects, each object contains a species name and the unique database id of that species:
+
+`{"species": [{ Species: 'californica', id: 360}, ...]}`
+
+### GET to /api/usda/:id
+
+returns the complete plant data associated with the provided id:
+
+`{"plant":{"id": 360, ...}}`

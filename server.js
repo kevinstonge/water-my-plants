@@ -17,4 +17,3 @@ server.use("/api/plants", require("./api/plants/plant-router.js"));
 server.use("/api/usda", require("./api/usda/usda-router.js"));
 
 module.exports = server;
-
