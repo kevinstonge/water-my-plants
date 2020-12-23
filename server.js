@@ -16,8 +16,3 @@ server.use("/api/plants", require("./api/plants/plant-router.js"));
 
 module.exports = server;
 
-/*
-TODO:
-  plants (all)
-  expore this: https://github.com/sckott/usdaplantsapi/blob/master/usdadb_new.sqlite3
-*/
