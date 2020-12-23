@@ -3,7 +3,8 @@ module.exports = require("knex")(
         client: "sqlite3",
         connection: {
             filename: "./data/usdadb.sqlite3",
-        }
+        },
+        useNullAsDefault: true,
     }
 );
 
