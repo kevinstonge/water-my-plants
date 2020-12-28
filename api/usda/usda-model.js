@@ -6,7 +6,6 @@ const getAllGenera = async () => {
     }
     catch (error) {
         console.log("usda-model-8")
-        res.status(500).json({error: "error retrieving genera from database"})
         throw error;
     }
 }
@@ -17,7 +16,6 @@ const getSpeciesInGenus = async (genus) => {
     } 
     catch (error) {
         console.log("usda-model-19");
-        res.status(500).json({ error: "error retrieving species list from database" })
         throw error;
     }
 }
@@ -27,18 +25,20 @@ const getPlantById = async (id) => {
         return await plantdb('usda').where({ id }).first();
     }
     catch (error) {
-        res.status(500).json({error: `error retrieving plant (id: ${id}) from the database`})
         throw error;
     }
 }
 
-const searchByCommonName = async (query) => {
+const searchByCommonName = async (query, offset) => {
     //Common_Name
     try {
-        return await plantdb('usda').where('Common_Name', 'like', `%${query}%`)
+        const results = () => plantdb('usda').where('Common_Name', 'like', `%${query}%`);
+        const resultsSubset = await results().offset(offset);
+        const totalResults = await results().count();
+        return ({results: resultsSubset, totalResults: totalResults[0]['count(*)']})
     }
     catch (error) {
-        res.status(500).json({error: `error querying the database`})
+        throw error;
     }
 }
 

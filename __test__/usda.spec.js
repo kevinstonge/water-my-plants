@@ -25,10 +25,8 @@ describe("GET request to /api/usda/:id", () => {
 })
 
 describe("GET request to /api/usda/search?commonName=queryString", () => {
-    it("should return first ten search results", async () => {
-        const result = await request(server).get("/api/usda/search?commonName=fast");
-        expect(result).toBe("asdf");
+    it("should return first twenty search results", async () => {
+        const result = await request(server).get("/api/usda/search?commonName=flor&offset=0");
+        expect(result.body.results.length).toBe(20);
     })
 })
-//GET /search/q=asdf
-//req.query.q

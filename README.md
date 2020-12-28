@@ -201,3 +201,19 @@ returns all species in the database that belong to the specified genus. The data
 returns the complete plant data associated with the provided id:
 
 `{"plant":{"id": 360, ...}}`
+
+### GET to /api/usda/search/?commonName=[query]
+
+send a get request with a search query, example to search for 'florida':
+
+`/api/usda/search/?commonName=florida`
+
+the server will return a list of search results
+
+```javascript
+{
+    "results": [{"id":71,"Symbol":"ABHI", ...}, {"id":1585,"Symbol":"AGARI", ...}, ...],
+    "totalResults": 160,
+    "offset": 0
+}
+```

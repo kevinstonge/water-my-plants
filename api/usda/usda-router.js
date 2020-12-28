@@ -25,12 +25,22 @@ router.get('/:genus/species', async (req, res) => {
 
 router.get('/search/', async (req, res) => {
     try {
-        console.log(req.query);
-        const results = await Usda.searchByCommonName(req.query.commonName);
-        console.log(results);
-        res.status(200).json({ results: results });
+        if (req.query && req.query.commonName) {
+            if (req.query.commonName.length > 3) {
+                const offset = (req.query.offset && req.query.offset >= 0) ? req.query.offset : 0;
+                const { results, totalResults } = await Usda.searchByCommonName(req.query.commonName, offset);
+                res.status(200).json({ results, totalResults, offset });
+            }
+            else {
+                res.status(400).json({ error: "query must contain at least 4 characters" });
+            }
+        }
+        else {
+            res.status(400).json({error: "missing query: /search?commonName=query"})
+        }
     }
     catch (error) {
+        console.log(error);
         res.status(500).json({error: "error performing the requested query"})
     }
 })
