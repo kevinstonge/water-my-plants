@@ -32,4 +32,14 @@ const getPlantById = async (id) => {
     }
 }
 
-module.exports = { getAllGenera, getSpeciesInGenus, getPlantById }
+const searchByCommonName = async (query) => {
+    //Common_Name
+    try {
+        return await plantdb('usda').where('Common_Name', 'like', `%${query}%`)
+    }
+    catch (error) {
+        res.status(500).json({error: `error querying the database`})
+    }
+}
+
+module.exports = { getAllGenera, getSpeciesInGenus, getPlantById, searchByCommonName }

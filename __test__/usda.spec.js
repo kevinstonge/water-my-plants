@@ -23,3 +23,12 @@ describe("GET request to /api/usda/:id", () => {
         expect(result.body.plant.Species).toBe('californica')
     })
 })
+
+describe("GET request to /api/usda/search?commonName=queryString", () => {
+    it("should return first ten search results", async () => {
+        const result = await request(server).get("/api/usda/search?commonName=fast");
+        expect(result).toBe("asdf");
+    })
+})
+//GET /search/q=asdf
+//req.query.q

@@ -23,15 +23,29 @@ router.get('/:genus/species', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/search/', async (req, res) => {
     try {
-        const plant = await Usda.getPlantById(req.params.id);
-        res.status(200).json({plant})
+        console.log(req.query);
+        const results = await Usda.searchByCommonName(req.query.commonName);
+        console.log(results);
+        res.status(200).json({ results: results });
     }
     catch (error) {
-        console.log('usda-router-32');
-        res.status(500).json({error: "error getting information about that plant"})
+        res.status(500).json({error: "error performing the requested query"})
     }
 })
+
+router.get('/:id', async (req, res) => {
+    try {
+            const plant = await Usda.getPlantById(req.params.id);
+            res.status(200).json({ plant })
+        }
+        catch (error) {
+            console.log('usda-router-32');
+            res.status(500).json({ error: "error getting information about that plant" })
+        }
+})
+
+
 
 module.exports = router;
