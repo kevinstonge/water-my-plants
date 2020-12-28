@@ -33,7 +33,7 @@ const searchByCommonName = async (query, offset) => {
     //Common_Name
     try {
         const results = () => plantdb('usda').where('Common_Name', 'like', `%${query}%`);
-        const resultsSubset = await results().offset(offset);
+        const resultsSubset = await results().limit(20).offset(offset);
         const totalResults = await results().count();
         return ({results: resultsSubset, totalResults: totalResults[0]['count(*)']})
     }
