@@ -37,6 +37,14 @@ describe("GET request to /api/usda/search?commonName=queryString", () => {
   });
 });
 
+describe("GET request to /api/usda/filtered-search?commonName=queryString", () => {
+  it("should return array of search results only if the results contain values for precipitation, soil, and root data", async () => {
+    const result = await request(server).get("/api/usda/filtered-search?commonName=flor");
+    expect(result.body.result).toBe("zero qualifying results");
+    const result2 = await request(server).get("/api/usda/filtered-search?commonName=virg");
+    expect(parseFloat(result2.body.result.Precipitation_Minimum)).toBeGreaterThan(0);
+  })
+})
 /*
   "pagination": {
     "offset": 20,

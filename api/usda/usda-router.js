@@ -51,6 +51,27 @@ router.get("/search/", async (req, res) => {
   }
 });
 
+router.get("/filtered-search", async (req, res) => {
+  try {
+    if (req.query && req.query.commonName) {
+      if (req.query.commonName.length > 3) {
+        const result = await Usda.filteredSearchByCommonName(req.query.commonName);
+        res.status(200).json({result})
+      }
+      else {
+        res.status(400).json({error: "query must contain at least 4 characters"})
+      }
+    }
+    else {
+      res.status(400).json({ error: "missing query: /filtered-search?commonName=query" });
+    }
+  }
+  catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "error performing the requested query" });
+  }
+})
+
 router.get("/:id", async (req, res) => {
   try {
     const plant = await Usda.getPlantById(req.params.id);

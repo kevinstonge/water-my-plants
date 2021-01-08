@@ -217,3 +217,11 @@ the server will return a list of search results
     "offset": 0
 }
 ```
+
+provide an offset in the query like this:
+
+`/api/usda/search/?commonName=florida&offset=10`
+
+### GET to /api/usda/filtered-search/?commonName=[query]
+
+send a get request with a search query and the server will return the first matching plant object that contains values for Adapted_to_Coarse_Textured_Soils, Adapted_to_Medium_Textured_Soils, Adapted_to_Fine_Textured_Soils, Precipitation_Minimum, Precipitation_Maximum, and Root_Depth_Minimum_inches. If no qualifying results are found the server will return `{ "result": "zero qualifying results" }`
